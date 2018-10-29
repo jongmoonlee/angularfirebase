@@ -58,6 +58,12 @@ export class ChatService {
     console.log('Called sendMessage()!');
   }
 
+  editMessage(msgId, msg: string) {
+    return this.db.object('/messages/' + msgId).update(msg);
+
+
+  }
+
   getMessage(): FirebaseListObservable<ChatMessage[]> {
     return this.db.list('messages', {
       query: {
@@ -66,6 +72,12 @@ export class ChatService {
       }
     });
   }
+
+  deleteMessage(msgId) {
+    return this.db.object('/messages/' + msgId).remove();
+  }
+
+
 
   getTimeStamp() {
     const now = new Date();
